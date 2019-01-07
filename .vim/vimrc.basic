@@ -1,0 +1,59 @@
+set nocompatible
+
+" there are many like it, but this one is mine
+let mapleader = ","
+
+" enable filetype plugins
+filetype plugin indent on
+
+" standard file type ignore
+set wildignore+=*/tmp/*,*.swo,*.swp,*.pyc,__pycache__,*.zip
+
+" colorscheme, if available
+colorscheme elflord
+
+" indentation rules
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+
+" interface
+set autoread
+set nu
+set ruler
+set encoding=utf-8
+set scrolloff=3
+set showmode
+set showcmd
+set hidden
+set wildmenu
+set wildmode=list:longest,full
+set visualbell
+set ttyfast
+set backspace=indent,eol,start
+set laststatus=2
+set wrap
+set formatoptions=qrn1
+set linebreak
+set t_Co=256
+
+" smarter file searching; only use case-sensitive if a capital letter is present
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set bs=2
+
+" custom escape key
+inoremap ii <ESC>
+vnoremap ii <ESC>
+
+" don't break from visual mode when changing indentation
+vnoremap < <gv
+vnoremap > >gv
+
+" cursor line highlight
+autocmd WinEnter,InsertLeave * set cursorline
+autocmd WinLeave,InsertEnter * set nocursorline
