@@ -138,7 +138,7 @@ function __ps1() {
 
         local clean=0
         if (( num_changed == 0 && num_staged == 0 && num_untracked == 0 && num_conflicts == 0)) ; then
-            echo "(${COLOR_GOLD}${gitbranch}|${COLOR_GOLD}✔)"
+            echo "${COLOR_DEFAULT}[ ${COLOR_GOLD}${gitbranch} | ${COLOR_GOLD}✔ ${COLOR_DEFAULT}] "
             return
         fi
 
@@ -147,7 +147,7 @@ function __ps1() {
         (( $num_changed > 0 )) && changed=" ${COLOR_YELLOW}✚${COLOR_YELLOW}${num_changed}"
         (( $num_conflicts > 0 )) && conflicts=" ${COLOR_RED}✖${COLOR_RED}${num_conflicts}"
 
-        echo "${COLOR_DEFAULT}[ ${COLOR_GOLD}${gitbranch} |${staged}${untracked}${changed}${conflicts} ${COLOR_DEFAULT}]"
+        echo "${COLOR_DEFAULT}[ ${COLOR_GOLD}${gitbranch} |${staged}${untracked}${changed}${conflicts} ${COLOR_DEFAULT}] "
     }
 
     #######################################
