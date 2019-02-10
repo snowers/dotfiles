@@ -1,0 +1,30 @@
+#!/bin/bash
+
+function _install() {
+    readonly local user="$USER"
+    readonly local path=$(pwd)
+    readonly local dest="/home/${user}"
+    echo "Installing scripts for ${user} from ${path}"
+
+    echo "Copying bash profile and configuration files"
+    cp "${path}/.bash_prompt" ${dest}/.bash_prompt
+    cp "${path}/.bash_aliases" ${dest}/.bash_aliases
+    cp "${path}/.bash_profile" ${dest}/.bash_profile
+    cp "${path}/.gitconfig" ${dest}/.gitconfig
+    cp "${path}/.tmux.conf" ${dest}/.tmux.conf
+    cp "${path}/.ctags" ${dest}/.ctags
+
+    echo "Sourcing bash profile"
+    source ${dest}/.bash_profile
+
+    echo "Installing .vim"
+    cp -R ${path}/.vim ${dest}
+
+    echo "Configuring vim plugins"
+    vim +PlugInstall +qall 
+
+    echo "Complete"
+}
+
+_install
+unset _install
