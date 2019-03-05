@@ -11,7 +11,6 @@ export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Environment Variables
-export GREP_OPTIONS='--color=auto'
 export LANG='en_US.UTF-8'
 
 # Golang
