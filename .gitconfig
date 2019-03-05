@@ -2,9 +2,6 @@
     name = Scott Nowers
     email = scott.nowers@gmail.com
 
-[init]
-    templatedir = ~/.mygit
-
 [interactive]
     singlekey = true
 
