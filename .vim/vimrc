@@ -22,12 +22,14 @@ Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'sandeepcr529/Buffet.vim', { 'on': 'Bufferlist' }
 Plug 'jreybert/vimagit', { 'on': 'Magit'  }
 " tag management
-" Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 " tim pope's crazy utility belt
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
+" terraform
+Plug 'hashivim/vim-terraform'
 " alignment
 Plug 'godlygeek/tabular'
 " searching
@@ -45,7 +47,7 @@ Plug 'skywind3000/asyncrun.vim'  " allows for any command to be executed async (
 Plug 'jiangmiao/auto-pairs'  " auto-complete [], {}, () etc.
 Plug 'AndrewRadev/splitjoin.vim'  " gS and gJ to collapse and expand lists
 " auto complete
-" Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 " javascript
 Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
 Plug 'mxw/vim-jsx', { 'for' : ['javascript'] }
@@ -167,9 +169,9 @@ noremap <leader>v  :Commentary<cr>
 
 " ycm commmands; used extensively for moving between buffers and viewing
 " the doc strings and stacks of a function
-" nnoremap yd :YcmCompleter GoToDeclaration<cr>
-" nnoremap yr :YcmCompleter GoToReferences<cr>
-" nnoremap ye :YcmCompleter GetDoc<cr>
+nnoremap yd :YcmCompleter GoToDeclaration<cr>
+nnoremap yr :YcmCompleter GoToReferences<cr>
+nnoremap ye :YcmCompleter GetDoc<cr>
 
 " correct fold depth
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<cr>
@@ -188,6 +190,25 @@ set tags=./tags,./.git/tags
 
 " ale
 let g:ale_set_quickfix = 1
+let g:ale_python_autopep8_executable = 'autopep8'
+let g:ale_python_autopep8_global = 1
+let g:ale_python_autopep8_options = 1
+let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_on_enter = 1
+let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 0
+let g:ale_sign_error='✗'
+let g:ale_sign_warning = '⚡'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] [%code%] %s [%severity%]'
+let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK']
+let g:ale_linters = {
+    \ 'python': ['pylint']
+    \}
+let g:ale_fixers = {
+    \    'python': ['autopep8', 'black', 'reorder-python-imports', 'isort'],
+    \}
 
 " airline
 let g:airline#extensions#tabline#enabled = 1
@@ -214,7 +235,7 @@ let g:ycm_max_num_candidates = 15
 let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
 
 " tag management
-" set statusline+=%{gutentags#statusline()}
+set statusline+=%{gutentags#statusline()}
 
 let g:ycm_filetype_blacklist = {
       \ 'tagbar': 1,

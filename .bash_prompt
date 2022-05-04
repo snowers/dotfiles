@@ -7,7 +7,9 @@
 # Scott Nowers <scott.nowers@gmail.com>
 
 PROMPT_SET_MINIMAL=false
-PROMPT_SET_SYSTEM=false
+PROMPT_SET_SYSTEM=true
+KUBE_ONLY=fale
+GIT_ONLY=true
 
 #######################################
 # Closure to set the proper functions used to query system
@@ -78,6 +80,16 @@ function __ps1() {
 
         echo "${color}CPU: ${COLOR_DARK_COLOR_GREY}${load}"
     }
+
+    #######################################
+    # Prints current Git branch or nothing
+    #######################################
+    function _get_kube_context() {
+        local color=${COLOR_BOLD_GREEN}
+        local branch=$(kubectl config current-context &>/dev/null; if [ $? -eq 0 ]; then echo "${color}[  ${color}$(kubectl config current-context) | ${COLOR_YELLOW}$(kubens -c) ${COLOR_DEFAULT}]"; fi)
+        echo $branch
+    }
+
 
     #######################################
     # Prints current Git branch or nothing
@@ -181,18 +193,24 @@ function __ps1() {
             return
         fi
 
-        local prompt=`_get_git_prompt`
+        local full_prompt=`_get_git_prompt`
+        if [[ "$KUBE_ONLY" == true ]]; then
+            local full_prompt=`_get_kube_context`
+        elif [[ "$GIT_ONLY" == false ]]; then
+            local kube=`_get_kube_context`
+            local full_prompt="${full_prompt}${kube}"
+        fi
 
         if [[ "$PROMPT_SET_SYSTEM" == false ]]; then
-            export PS1="${host} ${path} ${COLOR_BOLD_CYAN}]${err} ${prompt}${COLOR_DEFAULT}$ "
+            export PS1="${host} ${path} ${COLOR_BOLD_CYAN}]${err} ${full_prompt} ${COLOR_DEFAULT}$ "
             return
         fi
 
         local cpu=`_get_cpu_load`
         local time=`_format_time`
-        local mem=`_get_available_memory`
+        # local mem=`_get_available_memory`
 
-        export PS1="${host} ${cpu} ${mem} ${COLOR_WHITE}${time} ${path} ${COLOR_BOLD_CYAN}]${err} \n${prompt}${COLOR_DEFAULT}$ "
+        export PS1="${host} ${cpu} ${COLOR_WHITE}${time} ${path} ${COLOR_BOLD_CYAN}]${err}\n${full_prompt} ${COLOR_DEFAULT}$ "
     }
 
     # Set the prompt command method; this will be invoked by BASH
