@@ -202,7 +202,7 @@ function __ps1() {
         fi
 
         if [[ "$PROMPT_SET_SYSTEM" == false ]]; then
-            export PS1="${host} ${path} ${COLOR_BOLD_CYAN}]${err} ${full_prompt} ${COLOR_DEFAULT}$ "
+            export PS1="${host} ${path} ${COLOR_BOLD_CYAN}]${err} ${full_prompt}${COLOR_DEFAULT}$ "
             return
         fi
 
@@ -210,7 +210,7 @@ function __ps1() {
         local time=`_format_time`
         # local mem=`_get_available_memory`
 
-        export PS1="${host} ${cpu} ${COLOR_WHITE}${time} ${path} ${COLOR_BOLD_CYAN}]${err}\n${full_prompt} ${COLOR_DEFAULT}$ "
+        export PS1="${host} ${cpu} ${COLOR_WHITE}${time} ${path} ${COLOR_BOLD_CYAN}]${err}\n${full_prompt}${COLOR_DEFAULT}$ "
     }
 
     # Set the prompt command method; this will be invoked by BASH
