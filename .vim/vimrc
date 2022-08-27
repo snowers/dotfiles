@@ -55,7 +55,10 @@ Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
 Plug 'mxw/vim-jsx', { 'for' : ['javascript'] }
 " typescript
 Plug 'leafgarland/typescript-vim'
-" lint and fixing
+" salt
+Plug 'glench/vim-jinja2-syntax'
+Plug 'saltstack/salt-vim'
+"  lint and fixing
 Plug 'w0rp/ale'
 " fin
 call plug#end()
