@@ -184,8 +184,13 @@ function __ps1() {
 
         local err="${COLOR_RED}$errprompt"
 
-        local host="${COLOR_BOLD_CYAN}[\[ ${COLOR_BOLD_CYAN}\u${COLOR_GREEN}@${COLOR_BOLD_CYAN}\h"
         local path="${COLOR_BOLD_GREEN}\w"
+        local host="${COLOR_BOLD_CYAN}[\[ ${COLOR_BOLD_CYAN}\u${COLOR_GREEN}@${COLOR_BOLD_CYAN}\h"
+        # Check for the salt minion_id, which is more verbose
+        if [[ -f /etc/salt/minion_id ]]; then
+            local minion_id=`cat /etc/salt/minion_id`
+            local host="${COLOR_BOLD_CYAN}[\[ ${COLOR_BOLD_CYAN}\u${COLOR_GREEN}@${COLOR_BOLD_CYAN}${minion_id}"
+        fi
 
         # If this is a minimal implementation, just show the host and path
         if [[ "$PROMPT_SET_MINIMAL" == true ]]; then
