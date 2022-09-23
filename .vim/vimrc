@@ -6,6 +6,19 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+Plug 'tmux-plugins/vim-tmux'
+Plug 'aliou/bats.vim'
+" snipmate
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'ervandew/supertab'
+" devops
+Plug 'vim-denops/denops.vim'
+Plug 'skanehira/denops-docker.vim'
+" focus
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 " status
 Plug 'vim-airline/vim-airline'
 " color and interface
@@ -252,3 +265,15 @@ let g:ycm_filetype_blacklist = {
       \ 'markdown': 1,
       \ 'magit': 1,
       \}
+
+" devops
+let g:denops_disable_version_check = 1
+
+" snippets
+let g:ycm_key_list_select_completion = ['<C-n>', '<tab>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<s-tab>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+let g:UltiSnipsExpandTrigger = "<enter>"
+let g:UltiSnipsJumpForwardTrigger = "<C-Down>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-Up>"
